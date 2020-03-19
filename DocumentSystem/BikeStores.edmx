@@ -263,6 +263,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_get_all_files" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_get_file_details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="invoice_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_insert_file" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="invoice_PO" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="invoice_MIME" Type="nvarchar" Mode="In" />
+          <Parameter Name="invoice_document" Type="varbinary(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="BikeStores2ModelStoreContainer">
           <EntitySet Name="brands" EntityType="Self.brands" Schema="production" store:Type="Tables" />
           <EntitySet Name="categories" EntityType="Self.categories" Schema="production" store:Type="Tables" />
@@ -649,6 +658,15 @@
             <End Role="staffs" EntitySet="staffs" />
           </AssociationSet>
           <EntitySet Name="InvoiceDetails" EntityType="BikeStores2Model.InvoiceDetail" />
+          <FunctionImport Name="sp_get_all_files" ReturnType="Collection(BikeStores2Model.sp_get_all_files_Result)" />
+          <FunctionImport Name="sp_get_file_details" ReturnType="Collection(BikeStores2Model.sp_get_file_details_Result)">
+            <Parameter Name="invoice_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insert_file">
+            <Parameter Name="invoice_PO" Mode="In" Type="String" />
+            <Parameter Name="invoice_MIME" Mode="In" Type="String" />
+            <Parameter Name="invoice_document" Mode="In" Type="Binary" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="InvoiceDetail">
           <Key>
@@ -659,6 +677,18 @@
           <Property Name="invoice_document" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="invoice_MIME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="sp_get_all_files_Result">
+          <Property Type="Int32" Name="invoice_id" Nullable="false" />
+          <Property Type="String" Name="invoice_PO" Nullable="true" />
+          <Property Type="Binary" Name="invoice_document" Nullable="true" />
+          <Property Type="String" Name="invoice_MIME" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_get_file_details_Result">
+          <Property Type="Int32" Name="invoice_id" Nullable="false" />
+          <Property Type="String" Name="invoice_PO" Nullable="true" />
+          <Property Type="String" Name="invoice_MIME" Nullable="true" MaxLength="100" />
+          <Property Type="Binary" Name="invoice_document" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -781,6 +811,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_all_files" FunctionName="BikeStores2Model.Store.sp_get_all_files">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BikeStores2Model.sp_get_all_files_Result">
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
+                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
+                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_file_details" FunctionName="BikeStores2Model.Store.sp_get_file_details">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BikeStores2Model.sp_get_file_details_Result">
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
+                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
+                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_insert_file" FunctionName="BikeStores2Model.Store.sp_insert_file" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
