@@ -27,7 +27,7 @@ namespace DocumentSystem.Controllers
 
 					try
 					{
-						model.FileList = this._dbService.sp_get_all_files().Select(p => new InvoiceDetailsModel
+						model.FileList = this._dbService.sp_get_all_files2().Select(p => new InvoiceDetailsModel
 						{
 							InvoiceID = p.invoice_id,
 							InvoicePO = p.invoice_PO,
@@ -63,17 +63,16 @@ namespace DocumentSystem.Controllers
 							byte[] uploadedFile = new byte[model.File.InputStream.Length];
 							model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
 
-							fileName = Path.GetFileName(model.File.FileName);
+							fileName = Path.GetFileNameWithoutExtension(model.File.FileName);
 							fileExt = model.File.ContentType;
 							fileContent = uploadedFile;
 
-
 							//save file to database
-							this._dbService.sp_insert_file(fileName, fileExt, fileContent);
+							this._dbService.sp_insert_file2(fileName, fileExt, fileContent);
 
 						}
 
-						model.FileList = _dbService.sp_get_all_files().Select(p => new InvoiceDetailsModel
+						model.FileList = _dbService.sp_get_all_files2().Select(p => new InvoiceDetailsModel
 						{
 							InvoiceID = p.invoice_id,
 							InvoicePO = p.invoice_PO,
@@ -102,7 +101,7 @@ namespace DocumentSystem.Controllers
 
 					try
 					{
-						var fileInfo = this._dbService.sp_get_file_details(fileId).First();
+						var fileInfo = this._dbService.sp_get_file_details2(fileId).First();
 
 						return this.GetFile(fileInfo.invoice_document, fileInfo.invoice_MIME);
 					}

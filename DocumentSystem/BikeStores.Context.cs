@@ -53,7 +53,38 @@ namespace DocumentSystem
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_file_details_Result>("sp_get_file_details", invoice_idParameter);
         }
     
-        public virtual int sp_insert_file(string invoice_PO, string invoice_MIME, byte[] invoice_document)
+        public virtual ObjectResult<sp_get_all_files2_Result> sp_get_all_files2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_all_files2_Result>("sp_get_all_files2");
+        }
+    
+        public virtual ObjectResult<sp_get_file_details2_Result> sp_get_file_details2(Nullable<int> invoice_id)
+        {
+            var invoice_idParameter = invoice_id.HasValue ?
+                new ObjectParameter("invoice_id", invoice_id) :
+                new ObjectParameter("invoice_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_file_details2_Result>("sp_get_file_details2", invoice_idParameter);
+        }
+    
+        public virtual int sp_insert_file(string invoice_PO, string invoice_MIME, string invoice_document)
+        {
+            var invoice_POParameter = invoice_PO != null ?
+                new ObjectParameter("invoice_PO", invoice_PO) :
+                new ObjectParameter("invoice_PO", typeof(string));
+    
+            var invoice_MIMEParameter = invoice_MIME != null ?
+                new ObjectParameter("invoice_MIME", invoice_MIME) :
+                new ObjectParameter("invoice_MIME", typeof(string));
+    
+            var invoice_documentParameter = invoice_document != null ?
+                new ObjectParameter("invoice_document", invoice_document) :
+                new ObjectParameter("invoice_document", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_file", invoice_POParameter, invoice_MIMEParameter, invoice_documentParameter);
+        }
+    
+        public virtual int sp_insert_file2(string invoice_PO, string invoice_MIME, byte[] invoice_document)
         {
             var invoice_POParameter = invoice_PO != null ?
                 new ObjectParameter("invoice_PO", invoice_PO) :
@@ -67,7 +98,7 @@ namespace DocumentSystem
                 new ObjectParameter("invoice_document", invoice_document) :
                 new ObjectParameter("invoice_document", typeof(byte[]));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_file", invoice_POParameter, invoice_MIMEParameter, invoice_documentParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_file2", invoice_POParameter, invoice_MIMEParameter, invoice_documentParameter);
         }
     }
 }

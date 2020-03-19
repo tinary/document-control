@@ -10,14 +10,12 @@
 namespace DocumentSystem
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class InvoiceDocument
+    public partial class sp_get_all_files2_Result
     {
         public int invoice_id { get; set; }
         public string invoice_PO { get; set; }
         public byte[] invoice_document { get; set; }
         public string invoice_MIME { get; set; }
-        public Nullable<int> order_id { get; set; }
     }
 }

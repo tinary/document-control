@@ -175,7 +175,13 @@
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sp_get_all_files2_Result.cs">
+      <DependentUpon>BikeStores.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_get_all_files_Result.cs">
+      <DependentUpon>BikeStores.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_get_file_details2_Result.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_get_file_details_Result.cs">
