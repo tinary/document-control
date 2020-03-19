@@ -12,14 +12,16 @@ namespace DocumentSystem.Models
 		public List<InvoiceDetailsModel> FileList { get; set; }
 	}
 
-	//public class FileDetailsModel
+
+	//public class InvoiceDetailsModel
 	//{
-	//	public int FileID { get; set; }
-	//	public string FileName { get; set; }
-	//	public string FileExt { get; set; }
-	//	//public byte[] FileContent { get; set; }
-	//	public string FileContent { get; set; }
+	//	public int InvoiceID { get; set; }
+	//	public int OrderID { get; set; }
+	//	public string InvoicePO { get; set; }
+	//	public string InvoiceMIME { get; set; }
+	//	public string InvoiceDocument { get; set; }
 	//}
+
 
 	public class InvoiceDetailsModel
 	{
@@ -27,7 +29,7 @@ namespace DocumentSystem.Models
 		public int OrderID { get; set; }
 		public string InvoicePO { get; set; }
 		public string InvoiceMIME { get; set; }
-		public string InvoiceDocument { get; set; }
+		public byte[] InvoiceDocument { get; set; }
 	}
 
 }

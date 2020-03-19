@@ -150,6 +150,7 @@
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceUploadController.cs" />
     <Compile Include="Controllers\UploadDocController.cs" />
     <Compile Include="customer.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
