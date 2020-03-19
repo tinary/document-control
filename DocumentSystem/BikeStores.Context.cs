@@ -12,8 +12,6 @@ namespace DocumentSystem
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class BikeStores2Entities : DbContext
     {
@@ -32,41 +30,10 @@ namespace DocumentSystem
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<stock> stocks { get; set; }
         public virtual DbSet<customer> customers { get; set; }
-        public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual DbSet<order_items> order_items { get; set; }
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<staff> staffs { get; set; }
         public virtual DbSet<store> stores { get; set; }
-    
-        public virtual ObjectResult<sp_get_all_files_Result> sp_get_all_files()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_all_files_Result>("sp_get_all_files");
-        }
-    
-        public virtual ObjectResult<sp_get_file_details_Result> sp_get_file_details(Nullable<int> invoice_id)
-        {
-            var invoice_idParameter = invoice_id.HasValue ?
-                new ObjectParameter("invoice_id", invoice_id) :
-                new ObjectParameter("invoice_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_get_file_details_Result>("sp_get_file_details", invoice_idParameter);
-        }
-    
-        public virtual int sp_insert_file(string invoice_PO, string invoice_MIME, byte[] invoice_document)
-        {
-            var invoice_POParameter = invoice_PO != null ?
-                new ObjectParameter("invoice_PO", invoice_PO) :
-                new ObjectParameter("invoice_PO", typeof(string));
-    
-            var invoice_MIMEParameter = invoice_MIME != null ?
-                new ObjectParameter("invoice_MIME", invoice_MIME) :
-                new ObjectParameter("invoice_MIME", typeof(string));
-    
-            var invoice_documentParameter = invoice_document != null ?
-                new ObjectParameter("invoice_document", invoice_document) :
-                new ObjectParameter("invoice_document", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_file", invoice_POParameter, invoice_MIMEParameter, invoice_documentParameter);
-        }
+        public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
     }
 }
