@@ -658,14 +658,14 @@
             <End Role="staffs" EntitySet="staffs" />
           </AssociationSet>
           <EntitySet Name="InvoiceDetails" EntityType="BikeStores2Model.InvoiceDetail" />
-          <FunctionImport Name="sp_get_all_files" ReturnType="Collection(BikeStores2Model.sp_get_all_files_Result)" />
-          <FunctionImport Name="sp_get_file_details" ReturnType="Collection(BikeStores2Model.sp_get_file_details_Result)">
-            <Parameter Name="invoice_id" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="sp_insert_file">
             <Parameter Name="invoice_PO" Mode="In" Type="String" />
             <Parameter Name="invoice_MIME" Mode="In" Type="String" />
             <Parameter Name="invoice_document" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_get_all_files" ReturnType="Collection(BikeStores2Model.sp_get_all_files_Result)" />
+          <FunctionImport Name="sp_get_file_details" ReturnType="Collection(BikeStores2Model.sp_get_file_details_Result)">
+            <Parameter Name="invoice_id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="InvoiceDetail">
@@ -811,6 +811,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_insert_file" FunctionName="BikeStores2Model.Store.sp_insert_file" />
           <FunctionImportMapping FunctionImportName="sp_get_all_files" FunctionName="BikeStores2Model.Store.sp_get_all_files">
             <ResultMapping>
               <ComplexTypeMapping TypeName="BikeStores2Model.sp_get_all_files_Result">
@@ -831,7 +832,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_insert_file" FunctionName="BikeStores2Model.Store.sp_insert_file" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

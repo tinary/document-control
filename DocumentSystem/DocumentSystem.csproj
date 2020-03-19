@@ -128,6 +128,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BikeStores.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BikeStores.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BikeStores.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BikeStores.tt</DependentUpon>
+    </Compile>
     <Compile Include="BikeStores.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -161,6 +171,12 @@
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sp_get_all_files_Result.cs">
+      <DependentUpon>BikeStores.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_get_file_details_Result.cs">
+      <DependentUpon>BikeStores.tt</DependentUpon>
+    </Compile>
     <Compile Include="staff.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
@@ -175,10 +191,12 @@
     <Content Include="BikeStores.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BikeStores.edmx</DependentUpon>
+      <LastGenOutput>BikeStores.Context.cs</LastGenOutput>
     </Content>
     <Content Include="BikeStores.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BikeStores.edmx</DependentUpon>
+      <LastGenOutput>BikeStores.cs</LastGenOutput>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
