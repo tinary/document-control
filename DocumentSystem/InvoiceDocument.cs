@@ -10,8 +10,9 @@
 namespace DocumentSystem
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_get_all_files_Result
+    public partial class InvoiceDocument
     {
         public int invoice_id { get; set; }
         public string invoice_PO { get; set; }

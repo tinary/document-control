@@ -161,6 +161,9 @@
     <Compile Include="InvoiceDetail.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
+    <Compile Include="InvoiceDocument.cs">
+      <DependentUpon>BikeStores.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UploadDocModel.cs" />
     <Compile Include="order.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
@@ -242,6 +245,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\UploadDoc\Index.cshtml" />
+    <Content Include="Views\InvoiceUpload\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

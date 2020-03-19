@@ -25,11 +25,11 @@ namespace DocumentSystem.Models
 
 	public class InvoiceDetailsModel
 	{
-		public int InvoiceID { get; set; }
-		public int OrderID { get; set; }
-		public string InvoicePO { get; set; }
-		public string InvoiceMIME { get; set; }
-		public byte[] InvoiceDocument { get; set; }
+		public Int32? InvoiceID { get; set; }
+		public Int32? OrderID { get; set; }
+		public String InvoicePO { get; set; }
+		public String InvoiceMIME { get; set; }
+		public Byte[] InvoiceDocument { get; set; }
 	}
 
 }
