@@ -12,14 +12,14 @@ namespace DocumentSystem.Models
 		public List<InvoiceDetailsModel> FileList { get; set; }
 	}
 
-	public class FileDetailsModel
-	{
-		public int FileID { get; set; }
-		public string FileName { get; set; }
-		public string FileExt { get; set; }
-		//public byte[] FileContent { get; set; }
-		public string FileContent { get; set; }
-	}
+	//public class FileDetailsModel
+	//{
+	//	public int FileID { get; set; }
+	//	public string FileName { get; set; }
+	//	public string FileExt { get; set; }
+	//	//public byte[] FileContent { get; set; }
+	//	public string FileContent { get; set; }
+	//}
 
 	public class InvoiceDetailsModel
 	{
