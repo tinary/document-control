@@ -63,7 +63,7 @@ namespace DocumentSystem.Controllers
 							byte[] uploadedFile = new byte[model.File.InputStream.Length];
 							model.File.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
 
-							fileName = Path.GetFileName(model.File.);
+							fileName = Path.GetFileName(model.File.FileName);
 							fileExt = model.File.ContentType;
 							fileContent = Convert.ToBase64String(uploadedFile);
 
@@ -73,11 +73,11 @@ namespace DocumentSystem.Controllers
 
 						}
 
-						model.FileList = _dbService.spGetAllFiles().Select(p => new InvoiceDetailsModel
+						model.FileList = _dbService.sp_get_all_files().Select(p => new InvoiceDetailsModel
 						{
-							FileID = p.FileID,
-							FileName = p.FileName,
-							FileExt = p.FileExt
+							InvoiceID = p.invoice_id,
+							InvoicePO = p.invoice_PO,
+							InvoiceMIME = p.invoice_MIME
 						}).ToList();
 
 
@@ -102,9 +102,9 @@ namespace DocumentSystem.Controllers
 
 					try
 					{
-						var fileInfo = this._dbService.spGetFileDetails(fileId).First();
+						var fileInfo = this._dbService.sp_get_file_details(fileId).First();
 
-						return this.GetFile(fileInfo.FileContent, fileInfo.FileExt);
+						return this.GetFile(fileInfo.invoice_document, fileInfo.invoice_MIME);
 					}
 					catch (Exception ex)
 					{

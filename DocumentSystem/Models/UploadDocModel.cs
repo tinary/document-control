@@ -27,7 +27,7 @@ namespace DocumentSystem.Models
 		public int OrderID { get; set; }
 		public string InvoicePO { get; set; }
 		public string InvoiceMIME { get; set; }
-		public byte[] InvoiceDocument { get; set; }
+		public string InvoiceDocument { get; set; }
 	}
 
 }
