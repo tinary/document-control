@@ -39,15 +39,15 @@
 @if (Model != null)
 {
 	<div class="row">
-			<div class="col-md-8">
-				<h3>
-					<b>PO Number:</b>
-					<a class="download-file1" href="@Url.Action("GetPOFile", "POViewer", new { PONumber = @Model.PONumber })" target="_blank">
-						@Model.PONumber
-					</a>
-				</h3>
-			</div>
+		<div class="col-md-8">
+			<h3>
+				<b>PO Number:</b>
+				<a class="download-file1" href="@Url.Action("GetPOFile", "POViewer", new { PONumber = @Model.PONumber })" target="_blank">
+					@Model.PONumber
+				</a>
+			</h3>
 		</div>
+	</div>
 
 	<div>
 		<iframe src="@Url.Action("GetPOFile", "POViewer", new { PONumber = @Model.PONumber})" id="iframe" type="application/pdf" width="100%" height="800px" frameborder="0" allowfullscreen />
