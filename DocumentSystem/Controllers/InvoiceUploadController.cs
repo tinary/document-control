@@ -10,13 +10,6 @@ namespace DocumentSystem.Controllers
 {
     public class InvoiceUploadController : BaseController
 	{
-        /// <summary>
-        /// Initiate database entity
-        /// </summary>     
-				//private BikeStores2Entities _dbService = new BikeStores2Entities();
-
-
-
 				/// <summary>
         /// GET: Index
         /// </summary>        
@@ -68,7 +61,7 @@ namespace DocumentSystem.Controllers
 							fileContent = uploadedFile;
 
 							//save file to database
-							_db.spAddFile(fileName, fileExt, fileContent, model.OrderID);
+							_db.spAddFile(fileName, fileExt, fileContent);
 
 						}
 

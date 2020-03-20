@@ -22,11 +22,8 @@ namespace DocumentSystem.BAL
 								{
 									PONumber = x.invoice_PO,
 									InvoiceID = x.invoice_id,
-									OrderID = x.order_id,
 									InvoiceMIME = x.invoice_MIME,
 									InvoiceDocument = x.invoice_document,
-									//StoreID = x.store_id,
-									//StoreName = x.store_name
 								}).FirstOrDefault();
 			return po;
 		}

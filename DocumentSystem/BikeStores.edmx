@@ -283,7 +283,6 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
           <Parameter Name="invoice_PO" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="invoice_MIME" Type="nvarchar" Mode="In" />
           <Parameter Name="invoice_document" Type="varbinary(max)" Mode="In" />
-          <Parameter Name="order_id" Type="int" Mode="In" />
         </Function>
         <Function Name="spGetetAllFiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetFileDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -690,7 +689,6 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
             <Parameter Name="invoice_PO" Mode="In" Type="String" />
             <Parameter Name="invoice_MIME" Mode="In" Type="String" />
             <Parameter Name="invoice_document" Mode="In" Type="Binary" />
-            <Parameter Name="order_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetetAllFiles" ReturnType="Collection(BikeStores2Model.spGetetAllFiles_Result)" />
           <FunctionImport Name="spGetFileDetails" ReturnType="Collection(BikeStores2Model.spGetFileDetails_Result)">

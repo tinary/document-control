@@ -39,7 +39,7 @@ namespace DocumentSystem
         public virtual DbSet<vwDocumentLookup> vwDocumentLookups { get; set; }
         public virtual DbSet<InvoiceDocument> InvoiceDocuments { get; set; }
     
-        public virtual int spAddFile(string invoice_PO, string invoice_MIME, byte[] invoice_document, Nullable<int> order_id)
+        public virtual int spAddFile(string invoice_PO, string invoice_MIME, byte[] invoice_document)
         {
             var invoice_POParameter = invoice_PO != null ?
                 new ObjectParameter("invoice_PO", invoice_PO) :
@@ -53,11 +53,7 @@ namespace DocumentSystem
                 new ObjectParameter("invoice_document", invoice_document) :
                 new ObjectParameter("invoice_document", typeof(byte[]));
     
-            var order_idParameter = order_id.HasValue ?
-                new ObjectParameter("order_id", order_id) :
-                new ObjectParameter("order_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddFile", invoice_POParameter, invoice_MIMEParameter, invoice_documentParameter, order_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddFile", invoice_POParameter, invoice_MIMEParameter, invoice_documentParameter);
         }
     
         public virtual ObjectResult<spGetetAllFiles_Result> spGetetAllFiles()
