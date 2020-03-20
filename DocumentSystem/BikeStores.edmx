@@ -115,20 +115,6 @@
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="vwDocumentLookup">
-          <Key>
-            <PropertyRef Name="invoice_id" />
-            <PropertyRef Name="store_id" />
-            <PropertyRef Name="store_name" />
-          </Key>
-          <Property Name="invoice_id" Type="int" Nullable="false" />
-          <Property Name="order_id" Type="int" />
-          <Property Name="invoice_PO" Type="nvarchar(max)" />
-          <Property Name="invoice_document" Type="varbinary(max)" />
-          <Property Name="invoice_MIME" Type="nvarchar" MaxLength="100" />
-          <Property Name="store_id" Type="int" Nullable="false" />
-          <Property Name="store_name" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
         <Association Name="FK__order_ite__order__398D8EEE">
           <End Role="orders" Type="Self.orders" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -299,17 +285,6 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
           <EntitySet Name="orders" EntityType="Self.orders" Schema="sales" store:Type="Tables" />
           <EntitySet Name="staffs" EntityType="Self.staffs" Schema="sales" store:Type="Tables" />
           <EntitySet Name="stores" EntityType="Self.stores" Schema="sales" store:Type="Tables" />
-          <EntitySet Name="vwDocumentLookup" EntityType="Self.vwDocumentLookup" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vwDocumentLookup].[invoice_id] AS [invoice_id], 
-    [vwDocumentLookup].[order_id] AS [order_id], 
-    [vwDocumentLookup].[invoice_PO] AS [invoice_PO], 
-    [vwDocumentLookup].[invoice_document] AS [invoice_document], 
-    [vwDocumentLookup].[invoice_MIME] AS [invoice_MIME], 
-    [vwDocumentLookup].[store_id] AS [store_id], 
-    [vwDocumentLookup].[store_name] AS [store_name]
-    FROM [dbo].[vwDocumentLookup] AS [vwDocumentLookup]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__order_ite__order__398D8EEE" Association="Self.FK__order_ite__order__398D8EEE">
             <End Role="orders" EntitySet="orders" />
             <End Role="order_items" EntitySet="order_items" />
@@ -684,7 +659,6 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
             <End Role="stores" EntitySet="stores" />
             <End Role="staffs" EntitySet="staffs" />
           </AssociationSet>
-          <EntitySet Name="vwDocumentLookups" EntityType="BikeStores2Model.vwDocumentLookup" />
           <FunctionImport Name="spAddFile">
             <Parameter Name="invoice_PO" Mode="In" Type="String" />
             <Parameter Name="invoice_MIME" Mode="In" Type="String" />
@@ -696,20 +670,6 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
           </FunctionImport>
           <EntitySet Name="InvoiceDocuments" EntityType="BikeStores2Model.InvoiceDocument" />
         </EntityContainer>
-        <EntityType Name="vwDocumentLookup">
-          <Key>
-            <PropertyRef Name="invoice_id" />
-            <PropertyRef Name="store_id" />
-            <PropertyRef Name="store_name" />
-          </Key>
-          <Property Name="invoice_id" Type="Int32" Nullable="false" />
-          <Property Name="order_id" Type="Int32" />
-          <Property Name="invoice_PO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="invoice_document" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="invoice_MIME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="store_id" Type="Int32" Nullable="false" />
-          <Property Name="store_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
         <ComplexType Name="spGetetAllFiles_Result">
           <Property Type="Int32" Name="invoice_id" Nullable="false" />
           <Property Type="String" Name="invoice_PO" Nullable="true" />
@@ -840,19 +800,6 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="zip_code" ColumnName="zip_code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwDocumentLookups">
-            <EntityTypeMapping TypeName="BikeStores2Model.vwDocumentLookup">
-              <MappingFragment StoreEntitySet="vwDocumentLookup">
-                <ScalarProperty Name="store_name" ColumnName="store_name" />
-                <ScalarProperty Name="store_id" ColumnName="store_id" />
-                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
-                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
-                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
-                <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

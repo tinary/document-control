@@ -9,7 +9,7 @@ using DocumentSystem.BAL;
 
 namespace DocumentSystem.Controllers
 {
-    public class POViewerController : Controller
+    public class POViewerController : BaseController
     {
 
 				public ActionResult Index()

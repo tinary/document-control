@@ -36,7 +36,6 @@ namespace DocumentSystem
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<staff> staffs { get; set; }
         public virtual DbSet<store> stores { get; set; }
-        public virtual DbSet<vwDocumentLookup> vwDocumentLookups { get; set; }
         public virtual DbSet<InvoiceDocument> InvoiceDocuments { get; set; }
     
         public virtual int spAddFile(string invoice_PO, string invoice_MIME, byte[] invoice_document)

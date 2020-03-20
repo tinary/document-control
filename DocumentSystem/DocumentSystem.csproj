@@ -190,9 +190,6 @@
     <Compile Include="store.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
-    <Compile Include="vwDocumentLookup.cs">
-      <DependentUpon>BikeStores.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BikeStores.Context.tt">
