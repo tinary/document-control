@@ -38,6 +38,7 @@ namespace DocumentSystem
         public virtual DbSet<store> stores { get; set; }
         public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual DbSet<InvoiceDocument> InvoiceDocuments { get; set; }
+        public virtual DbSet<vwDocumentLookup> vwDocumentLookups { get; set; }
     
         public virtual ObjectResult<sp_get_all_files_Result> sp_get_all_files()
         {

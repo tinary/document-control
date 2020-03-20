@@ -5,19 +5,21 @@ using System.Web;
 
 namespace DocumentSystem.Models
 {
-	public class UploadDocModel
+	public class PODetailModel
 	{
-		public HttpPostedFileBase File { get; set; }
-		public List<InvoiceDetailsModel> FileList { get; set; }
+		public String PONumber { get; set; }
+		public List<POViwerModel> POList { get; set; }
+		
 	}
 
-	public class InvoiceDetailsModel
+	public class POViwerModel
 	{
+		public String PONumber { get; set; }
 		public Int32? InvoiceID { get; set; }
 		public Int32? OrderID { get; set; }
-		public String InvoicePO { get; set; }
 		public String InvoiceMIME { get; set; }
 		public Byte[] InvoiceDocument { get; set; }
+		public Int32 StoreID { get; set; }
+		public String StoreName { get; set; }
 	}
-
 }

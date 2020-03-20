@@ -128,6 +128,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BAL\BaseServiceLayer.cs" />
+    <Compile Include="BAL\POViewerServices.cs" />
     <Compile Include="BikeStores.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,8 +151,10 @@
     <Compile Include="category.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceUploadController.cs" />
+    <Compile Include="Controllers\POViewerController.cs" />
     <Compile Include="Controllers\UploadDocController.cs" />
     <Compile Include="customer.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
@@ -164,6 +168,7 @@
     <Compile Include="InvoiceDocument.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\POViwerModel.cs" />
     <Compile Include="Models\UploadDocModel.cs" />
     <Compile Include="order.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
@@ -194,6 +199,9 @@
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="store.cs">
+      <DependentUpon>BikeStores.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwDocumentLookup.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -252,6 +260,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\UploadDoc\Index.cshtml" />
     <Content Include="Views\InvoiceUpload\Index.cshtml" />
+    <Content Include="Views\POViewer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

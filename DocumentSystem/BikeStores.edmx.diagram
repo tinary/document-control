@@ -27,6 +27,7 @@
         <AssociationConnector Association="BikeStores2Model.FK__staffs__store_id__300424B4" ManuallyRouted="false" />
         <EntityTypeShape EntityType="BikeStores2Model.InvoiceDetail" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="BikeStores2Model.InvoiceDocument" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="BikeStores2Model.vwDocumentLookup" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

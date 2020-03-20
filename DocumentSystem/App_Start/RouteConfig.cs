@@ -16,7 +16,8 @@ namespace DocumentSystem
 			routes.MapRoute(
 					name: "Default",
 					url: "{controller}/{action}/{id}",
-					defaults: new { controller = "InvoiceUpload", action = "Index", id = UrlParameter.Optional }
+					//defaults: new { controller = "InvoiceUpload", action = "Index", id = UrlParameter.Optional }
+					defaults: new { controller = "POViewer", action = "Index", id = UrlParameter.Optional }
 			);
 		}
 	}
