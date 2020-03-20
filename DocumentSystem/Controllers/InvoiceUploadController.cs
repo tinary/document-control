@@ -18,7 +18,7 @@ namespace DocumentSystem.Controllers
 
 
 				/// <summary>
-        /// GET: UploadPI Index
+        /// GET: Index
         /// </summary>        
         /// <returns>Return index view</returns>
 				public ActionResult Index()
@@ -44,7 +44,7 @@ namespace DocumentSystem.Controllers
 
 
 				/// <summary>
-        /// POST: UploadPI Index
+        /// POST: Index
         /// </summary>
         /// <param name="model">Model parameter</param>
         /// <returns>Return response information</returns>
