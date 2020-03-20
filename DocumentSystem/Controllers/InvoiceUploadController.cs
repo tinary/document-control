@@ -8,12 +8,12 @@ using DocumentSystem.Models;
 
 namespace DocumentSystem.Controllers
 {
-    public class InvoiceUploadController : Controller
-    {
+    public class InvoiceUploadController : BaseController
+	{
         /// <summary>
         /// Initiate database entity
         /// </summary>     
-				private BikeStores2Entities _dbService = new BikeStores2Entities();
+				//private BikeStores2Entities _dbService = new BikeStores2Entities();
 
 
 
@@ -27,7 +27,7 @@ namespace DocumentSystem.Controllers
 
 					try
 					{
-						model.FileList = this._dbService.sp_get_all_files2().Select(p => new InvoiceDetailsModel
+						model.FileList = _db.spGetetAllFiles().Select(p => new InvoiceDetailsModel
 						{
 							InvoiceID = p.invoice_id,
 							InvoicePO = p.invoice_PO,
@@ -39,7 +39,7 @@ namespace DocumentSystem.Controllers
 					{
 						Console.Write(ex);
 					}
-					return this.View(model);
+					return View(model);
 				}
 
 
@@ -68,11 +68,11 @@ namespace DocumentSystem.Controllers
 							fileContent = uploadedFile;
 
 							//save file to database
-							this._dbService.sp_insert_file2(fileName, fileExt, fileContent);
+							_db.spAddFile(fileName, fileExt, fileContent, model.OrderID);
 
 						}
 
-						model.FileList = _dbService.sp_get_all_files2().Select(p => new InvoiceDetailsModel
+						model.FileList = _db.spGetetAllFiles().Select(p => new InvoiceDetailsModel
 						{
 							InvoiceID = p.invoice_id,
 							InvoicePO = p.invoice_PO,
@@ -86,12 +86,12 @@ namespace DocumentSystem.Controllers
 						Console.Write(ex);
 					}
 
-					return this.View(model);
+					return View(model);
 
 				}
 
 				/// <summary>
-				/// Download files to view or download physical copy if broswer don't support the file type
+				/// Download files to view or download physical copy if broswer doesn't support the file type
 				/// </summary>
 				/// <param name="fileId">File ID parameter</param>
 				/// <returns>Return download file</returns>
@@ -101,7 +101,7 @@ namespace DocumentSystem.Controllers
 
 					try
 					{
-						var fileInfo = this._dbService.sp_get_file_details2(fileId).First();
+						var fileInfo = _db.spGetFileDetails(fileId).First();
 
 						return this.GetFile(fileInfo.invoice_document, fileInfo.invoice_MIME);
 					}
@@ -110,7 +110,7 @@ namespace DocumentSystem.Controllers
 						Console.Write(ex);
 					}
 
-					return this.View(model);
+					return View(model);
 
 				}
 

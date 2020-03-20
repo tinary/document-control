@@ -9,6 +9,8 @@ namespace DocumentSystem.Models
 	{
 		public HttpPostedFileBase File { get; set; }
 		public List<InvoiceDetailsModel> FileList { get; set; }
+
+		public Int32? OrderID { get; set; }
 	}
 
 	public class InvoiceDetailsModel

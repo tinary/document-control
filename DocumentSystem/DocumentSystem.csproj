@@ -152,18 +152,13 @@
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceUploadController.cs" />
     <Compile Include="Controllers\POViewerController.cs" />
-    <Compile Include="Controllers\UploadDocController.cs" />
     <Compile Include="customer.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="InvoiceDetail.cs">
-      <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="InvoiceDocument.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
@@ -180,16 +175,10 @@
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sp_get_all_files2_Result.cs">
+    <Compile Include="spGetetAllFiles_Result.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_get_all_files_Result.cs">
-      <DependentUpon>BikeStores.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_get_file_details2_Result.cs">
-      <DependentUpon>BikeStores.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_get_file_details_Result.cs">
+    <Compile Include="spGetFileDetails_Result.cs">
       <DependentUpon>BikeStores.tt</DependentUpon>
     </Compile>
     <Compile Include="staff.cs">
@@ -255,10 +244,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\UploadDoc\Index.cshtml" />
     <Content Include="Views\InvoiceUpload\Index.cshtml" />
     <Content Include="Views\POViewer\Index.cshtml" />
   </ItemGroup>

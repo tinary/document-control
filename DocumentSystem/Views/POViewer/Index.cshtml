@@ -7,17 +7,6 @@
 	ViewBag.Title = "Index";
 }
 
-<script type="text/javascript">
-
-	@*$(document).ready(function () {
-		debugger
-			if (@this.Model.HasPO == 0) {
-				alert('Please enter valid purchase order number');
-			}
-		});*@
-
-</script>
-
 
 <h2>Purchase Order Document</h2>
 
@@ -30,19 +19,6 @@
 	<div class="form-horizontal">
 		<hr />
 		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		@*<div class="form-group">*@
-		@*@Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })*@
-		@*<div class="col-md-10">
-					@Html.TextBoxFor(model => model.PONumber, "", new { maxlength = 50, @placeholder = "PO Number", @id = "txtDocumentNo", @class = "form-control" })
-					@Html.ValidationMessageFor(model => model.PONumber, "", new { @class = "text-danger" })
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-offset-2 col-md-10">
-					<input type="submit" value="Find" class="btn btn-primary" />
-				</div>
-			</div>*@
-
 		<div class="col-md-4">
 			<div class="form-group">
 				@Html.TextBoxFor(model => model.PONumber, "", new { maxlength = 50, @placeholder = "PO Number", @id = "txtDocumentNo", @class = "form-control" })
@@ -54,9 +30,6 @@
 				<input type="submit" value="Find PO" class="btn btn-primary" />
 			</div>
 		</div>
-
-
-
 	</div>
 }
 
@@ -68,7 +41,7 @@
 	<div class="row">
 			<div class="col-md-8">
 				<h3>
-					PO Number:
+					<b>PO Number:</b>
 					<a class="download-file1" href="@Url.Action("GetPOFile", "POViewer", new { PONumber = @Model.PONumber })" target="_blank">
 						@Model.PONumber
 					</a>

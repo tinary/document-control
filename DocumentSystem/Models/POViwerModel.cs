@@ -5,13 +5,6 @@ using System.Web;
 
 namespace DocumentSystem.Models
 {
-	public class PODetailModel
-	{
-		public String PONumber { get; set; }
-		public List<POViwerModel> POList { get; set; }
-		
-	}
-
 	public class POViwerModel
 	{
 		public String PONumber { get; set; }

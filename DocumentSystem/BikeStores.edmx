@@ -53,21 +53,11 @@
           <Property Name="state" Type="varchar" MaxLength="25" />
           <Property Name="zip_code" Type="varchar" MaxLength="5" />
         </EntityType>
-        <EntityType Name="InvoiceDetails">
-          <Key>
-            <PropertyRef Name="invoice_id" />
-          </Key>
-          <Property Name="invoice_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="invoice_PO" Type="nvarchar(max)" />
-          <Property Name="invoice_document" Type="nvarchar(max)" />
-          <Property Name="invoice_MIME" Type="nvarchar" MaxLength="100" />
-        </EntityType>
         <EntityType Name="InvoiceDocuments">
           <Key>
             <PropertyRef Name="invoice_id" />
           </Key>
           <Property Name="invoice_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="order_id" Type="int" />
           <Property Name="invoice_PO" Type="nvarchar(max)" />
           <Property Name="invoice_document" Type="varbinary(max)" />
           <Property Name="invoice_MIME" Type="nvarchar" MaxLength="100" />
@@ -289,23 +279,15 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_get_all_files" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="sp_get_all_files2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="sp_get_file_details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="invoice_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_get_file_details2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="invoice_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_insert_file" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="invoice_PO" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="invoice_MIME" Type="nvarchar" Mode="In" />
-          <Parameter Name="invoice_document" Type="nvarchar(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_insert_file2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="spAddFile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="invoice_PO" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="invoice_MIME" Type="nvarchar" Mode="In" />
           <Parameter Name="invoice_document" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="order_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetetAllFiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetFileDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="invoice_id" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="BikeStores2ModelStoreContainer">
           <EntitySet Name="brands" EntityType="Self.brands" Schema="production" store:Type="Tables" />
@@ -313,7 +295,6 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
           <EntitySet Name="products" EntityType="Self.products" Schema="production" store:Type="Tables" />
           <EntitySet Name="stocks" EntityType="Self.stocks" Schema="production" store:Type="Tables" />
           <EntitySet Name="customers" EntityType="Self.customers" Schema="sales" store:Type="Tables" />
-          <EntitySet Name="InvoiceDetails" EntityType="Self.InvoiceDetails" Schema="sales" store:Type="Tables" />
           <EntitySet Name="InvoiceDocuments" EntityType="Self.InvoiceDocuments" Schema="sales" store:Type="Tables" />
           <EntitySet Name="order_items" EntityType="Self.order_items" Schema="sales" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="sales" store:Type="Tables" />
@@ -704,71 +685,19 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
             <End Role="stores" EntitySet="stores" />
             <End Role="staffs" EntitySet="staffs" />
           </AssociationSet>
-          <EntitySet Name="InvoiceDetails" EntityType="BikeStores2Model.InvoiceDetail" />
-          <EntitySet Name="InvoiceDocuments" EntityType="BikeStores2Model.InvoiceDocument" />
-          <FunctionImport Name="sp_get_all_files" ReturnType="Collection(BikeStores2Model.sp_get_all_files_Result)" />
-          <FunctionImport Name="sp_get_file_details" ReturnType="Collection(BikeStores2Model.sp_get_file_details_Result)">
-          <Parameter Name="invoice_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_get_all_files2" ReturnType="Collection(BikeStores2Model.sp_get_all_files2_Result)" />
-          <FunctionImport Name="sp_get_file_details2" ReturnType="Collection(BikeStores2Model.sp_get_file_details2_Result)">
-          <Parameter Name="invoice_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_insert_file">
-            <Parameter Name="invoice_PO" Mode="In" Type="String" />
-            <Parameter Name="invoice_MIME" Mode="In" Type="String" />
-            <Parameter Name="invoice_document" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_insert_file2">
+          <EntitySet Name="vwDocumentLookups" EntityType="BikeStores2Model.vwDocumentLookup" />
+          <FunctionImport Name="spAddFile">
             <Parameter Name="invoice_PO" Mode="In" Type="String" />
             <Parameter Name="invoice_MIME" Mode="In" Type="String" />
             <Parameter Name="invoice_document" Mode="In" Type="Binary" />
+            <Parameter Name="order_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="vwDocumentLookups" EntityType="BikeStores2Model.vwDocumentLookup" />
+          <FunctionImport Name="spGetetAllFiles" ReturnType="Collection(BikeStores2Model.spGetetAllFiles_Result)" />
+          <FunctionImport Name="spGetFileDetails" ReturnType="Collection(BikeStores2Model.spGetFileDetails_Result)">
+          <Parameter Name="invoice_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="InvoiceDocuments" EntityType="BikeStores2Model.InvoiceDocument" />
         </EntityContainer>
-        <EntityType Name="InvoiceDetail">
-          <Key>
-            <PropertyRef Name="invoice_id" />
-          </Key>
-          <Property Name="invoice_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="invoice_PO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="invoice_document" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="invoice_MIME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="InvoiceDocument">
-          <Key>
-            <PropertyRef Name="invoice_id" />
-          </Key>
-          <Property Name="invoice_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="invoice_PO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="invoice_document" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="invoice_MIME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="order_id" Type="Int32" />
-        </EntityType>
-        <ComplexType Name="sp_get_all_files_Result">
-          <Property Type="Int32" Name="invoice_id" Nullable="false" />
-          <Property Type="String" Name="invoice_PO" Nullable="true" />
-          <Property Type="String" Name="invoice_document" Nullable="true" />
-          <Property Type="String" Name="invoice_MIME" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="sp_get_file_details_Result">
-          <Property Type="Int32" Name="invoice_id" Nullable="false" />
-          <Property Type="String" Name="invoice_PO" Nullable="true" />
-          <Property Type="String" Name="invoice_MIME" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="invoice_document" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_get_all_files2_Result">
-          <Property Type="Int32" Name="invoice_id" Nullable="false" />
-          <Property Type="String" Name="invoice_PO" Nullable="true" />
-          <Property Type="Binary" Name="invoice_document" Nullable="true" />
-          <Property Type="String" Name="invoice_MIME" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="sp_get_file_details2_Result">
-          <Property Type="Int32" Name="invoice_id" Nullable="false" />
-          <Property Type="String" Name="invoice_PO" Nullable="true" />
-          <Property Type="String" Name="invoice_MIME" Nullable="true" MaxLength="100" />
-          <Property Type="Binary" Name="invoice_document" Nullable="true" />
-        </ComplexType>
         <EntityType Name="vwDocumentLookup">
           <Key>
             <PropertyRef Name="invoice_id" />
@@ -782,6 +711,27 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
           <Property Name="invoice_MIME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="store_id" Type="Int32" Nullable="false" />
           <Property Name="store_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="spGetetAllFiles_Result">
+          <Property Type="Int32" Name="invoice_id" Nullable="false" />
+          <Property Type="String" Name="invoice_PO" Nullable="true" />
+          <Property Type="Binary" Name="invoice_document" Nullable="true" />
+          <Property Type="String" Name="invoice_MIME" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="spGetFileDetails_Result">
+          <Property Type="Int32" Name="invoice_id" Nullable="false" />
+          <Property Type="String" Name="invoice_PO" Nullable="true" />
+          <Property Type="String" Name="invoice_MIME" Nullable="true" MaxLength="100" />
+          <Property Type="Binary" Name="invoice_document" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="InvoiceDocument">
+          <Key>
+            <PropertyRef Name="invoice_id" />
+          </Key>
+          <Property Name="invoice_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="invoice_PO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="invoice_document" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="invoice_MIME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -895,69 +845,6 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="InvoiceDetails">
-            <EntityTypeMapping TypeName="BikeStores2Model.InvoiceDetail">
-              <MappingFragment StoreEntitySet="InvoiceDetails">
-                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
-                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
-                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
-                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InvoiceDocuments">
-            <EntityTypeMapping TypeName="BikeStores2Model.InvoiceDocument">
-              <MappingFragment StoreEntitySet="InvoiceDocuments">
-                <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
-                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
-                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
-                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_get_all_files" FunctionName="BikeStores2Model.Store.sp_get_all_files">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BikeStores2Model.sp_get_all_files_Result">
-                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
-                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
-                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
-                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_get_file_details" FunctionName="BikeStores2Model.Store.sp_get_file_details">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BikeStores2Model.sp_get_file_details_Result">
-                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
-                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
-                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
-                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_get_all_files2" FunctionName="BikeStores2Model.Store.sp_get_all_files2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BikeStores2Model.sp_get_all_files2_Result">
-                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
-                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
-                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
-                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_get_file_details2" FunctionName="BikeStores2Model.Store.sp_get_file_details2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BikeStores2Model.sp_get_file_details2_Result">
-                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
-                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
-                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
-                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_insert_file" FunctionName="BikeStores2Model.Store.sp_insert_file" />
-          <FunctionImportMapping FunctionImportName="sp_insert_file2" FunctionName="BikeStores2Model.Store.sp_insert_file2" />
           <EntitySetMapping Name="vwDocumentLookups">
             <EntityTypeMapping TypeName="BikeStores2Model.vwDocumentLookup">
               <MappingFragment StoreEntitySet="vwDocumentLookup">
@@ -967,6 +854,37 @@ warning 6002: The table/view 'BikeStores2.dbo.vwDocumentLookup' does not have a 
                 <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
                 <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spAddFile" FunctionName="BikeStores2Model.Store.spAddFile" />
+          <FunctionImportMapping FunctionImportName="spGetetAllFiles" FunctionName="BikeStores2Model.Store.spGetetAllFiles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BikeStores2Model.spGetetAllFiles_Result">
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
+                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
+                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetFileDetails" FunctionName="BikeStores2Model.Store.spGetFileDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BikeStores2Model.spGetFileDetails_Result">
+                <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
+                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
+                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
+                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="InvoiceDocuments">
+            <EntityTypeMapping TypeName="BikeStores2Model.InvoiceDocument">
+              <MappingFragment StoreEntitySet="InvoiceDocuments">
+                <ScalarProperty Name="invoice_MIME" ColumnName="invoice_MIME" />
+                <ScalarProperty Name="invoice_document" ColumnName="invoice_document" />
+                <ScalarProperty Name="invoice_PO" ColumnName="invoice_PO" />
                 <ScalarProperty Name="invoice_id" ColumnName="invoice_id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -18,6 +18,11 @@ namespace DocumentSystem.Controllers
 				}
 
 
+				/// <summary>
+				/// Find purchase order, if not found return error message
+				/// </summary>
+				/// <param name="model">a model</param>
+				/// <returns>return response information</returns>
 				[HttpPost]
 				[ValidateAntiForgeryToken]
 				public ActionResult Index(POViwerModel model)
@@ -37,6 +42,11 @@ namespace DocumentSystem.Controllers
 				}
 
 
+				/// <summary>
+				/// Get purchase order
+				/// </summary>
+				/// <param name="PONumber">a string parameter</param>
+				/// <returns>return purchase order file</returns>
 				public ActionResult GetPOFile(string PONumber)
 				{
 					POViwerModel POViewModel = new POViwerModel();

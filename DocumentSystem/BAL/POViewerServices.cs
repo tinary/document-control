@@ -9,9 +9,14 @@ namespace DocumentSystem.BAL
 	public class POViewerServices : BaseServiceClass
 	{
 
+		/// <summary>
+		/// Find matching PO number from database
+		/// </summary>
+		/// <param name="PONumber">a string parameter</param>
+		/// <returns>return a model</returns>
 		public POViwerModel GetPODocument(string PONumber)
 		{
-			POViwerModel po = _db.vwDocumentLookups
+			POViwerModel po = _db.InvoiceDocuments
 								.Where(w => w.invoice_PO == PONumber)
 								.Select(x => new POViwerModel
 								{
@@ -20,8 +25,8 @@ namespace DocumentSystem.BAL
 									OrderID = x.order_id,
 									InvoiceMIME = x.invoice_MIME,
 									InvoiceDocument = x.invoice_document,
-									StoreID = x.store_id,
-									StoreName = x.store_name
+									//StoreID = x.store_id,
+									//StoreName = x.store_name
 								}).FirstOrDefault();
 			return po;
 		}

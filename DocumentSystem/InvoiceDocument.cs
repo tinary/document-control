@@ -18,6 +18,5 @@ namespace DocumentSystem
         public string invoice_PO { get; set; }
         public byte[] invoice_document { get; set; }
         public string invoice_MIME { get; set; }
-        public Nullable<int> order_id { get; set; }
     }
 }

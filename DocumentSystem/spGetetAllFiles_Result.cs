@@ -11,11 +11,11 @@ namespace DocumentSystem
 {
     using System;
     
-    public partial class sp_get_file_details_Result
+    public partial class spGetetAllFiles_Result
     {
         public int invoice_id { get; set; }
         public string invoice_PO { get; set; }
+        public byte[] invoice_document { get; set; }
         public string invoice_MIME { get; set; }
-        public string invoice_document { get; set; }
     }
 }
