@@ -8,7 +8,4 @@ This is a prototype I created for a project at my workplace. The prototype was i
 This document control application allows user to upload purchase order and to view the uploaded file. User can search purchase order by the document number and view the document. The program allows user to upload any valid documents, the program will save the document to a database with any MIME type and display the appropriate document in the application interface.
 
 ## Technology used in the project
-C#
-ASP.NET MVC (Model–View–Controller)
-SQL Server
-IIS Express 
+C#, ASP.NET MVC (Model–View–Controller), SQL Server, IIS Express 
